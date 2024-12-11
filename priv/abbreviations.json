@@ -1982,11 +1982,6 @@
         "abbreviations": ""
     },
     {
-        "legal_form_local_name": "CORPORATION",
-        "legal_form_transliterated_name": "CORPORATION",
-        "abbreviations": "Ltd."
-    },
-    {
         "legal_form_local_name": "PROJECT COMPANY",
         "legal_form_transliterated_name": "PROJECT COMPANY",
         "abbreviations": ""
@@ -2005,6 +2000,21 @@
         "legal_form_local_name": "APPELLATION COMMERCIALE - PROPRIÉTAIRE UNIQUE",
         "legal_form_transliterated_name": "APPELLATION COMMERCIALE - PROPRIÉTAIRE UNIQUE",
         "abbreviations": ""
+    },
+    {
+        "legal_form_local_name": "LIMITED LIABILITY",
+        "legal_form_transliterated_name": "LIMITED LIABILITY",
+        "abbreviations": "LLC"
+    },
+    {
+        "legal_form_local_name": "LIMITED LIABILITY CORPORATION",
+        "legal_form_transliterated_name": "LIMITED LIABILITY CORPORATION",
+        "abbreviations": "LLC"
+    },
+    {
+        "legal_form_local_name": "LLC COMPANY",
+        "legal_form_transliterated_name": "LLC COMPANY",
+        "abbreviations": "LLC"
     },
     {
         "legal_form_local_name": "COMPAGNIE",

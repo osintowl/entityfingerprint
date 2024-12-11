@@ -4,8 +4,8 @@ defmodule EntityFingerprint.MixProject do
   def project do
     [
       app: :entityfingerprint,
-      version: "0.1.3",
-      elixir: "~> 1.16",
+      version: "0.2.0",
+      elixir: "~> 1.17",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       package: package(),
@@ -31,6 +31,7 @@ defmodule EntityFingerprint.MixProject do
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]
   end
+
   defp package do
     [
       files: ~w(lib priv .formatter.exs mix.exs LICENSE*),
@@ -38,5 +39,4 @@ defmodule EntityFingerprint.MixProject do
       links: %{"GitHub" => "https://github.com/nix2intel/entityfingerprint"}
     ]
   end
-
 end

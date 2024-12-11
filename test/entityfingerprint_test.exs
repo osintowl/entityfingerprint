@@ -7,35 +7,45 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [fingerprint: "ag siemens", original: "Siemens Aktiengesellschaft", script: "latin"]}
+              %{
+                script: "latin",
+                original: "Siemens Aktiengesellschaft",
+                fingerprint: "069BCC150A2D09F1968E220F48B2362A655A7685",
+                fingerprint_str: "ag siemens"
+              }}
   end
 
   test "create fingerprint for New York, New York" do
     entity = "New York, New York"
 
     assert Fingerprint.create(entity) ==
-             {:ok, [fingerprint: "new york", original: "New York, New York", script: "latin"]}
+             {:ok,
+              %{
+                script: "latin",
+                original: "New York, New York",
+                fingerprint: "DDDD9606DD438582C9642AA4DEB3C013CBC89148",
+                fingerprint_str: "new york"
+              }}
   end
-  
+
   test "create fingerprint for empty abbreviation" do
     entity = "CHAMBRE DE COMMERCE"
 
     assert Fingerprint.create(entity) ==
-             {:error, "Entity perfectly matches abbreviation: CHAMBRE DE COMMERCE" } 
+             {:error, "Entity perfectly matches abbreviation: CHAMBRE DE COMMERCE"}
   end
-
-
 
   test "create fingerprint for Google" do
     entity = "Google Limited Liability Company    !!!"
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "google llc",
+              %{
+                script: "latin",
                 original: "Google Limited Liability Company    !!!",
-                script: "latin"
-              ]}
+                fingerprint: "382621CA5922751BB77F398DD0B3CB1B4EACE596",
+                fingerprint_str: "google llc"
+              }}
   end
 
   test "create fingerprint with emoji" do
@@ -43,18 +53,25 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "llc poop",
+              %{
+                script: "common",
                 original: " 💩 Limited Liability Company",
-                script: "common"
-              ]}
+                fingerprint: "2881722FEEB9C5AB87B7519C8FB711455690C330",
+                fingerprint_str: "llc poop"
+              }}
   end
 
   test "create fingerprint for Google llc dba" do
     entity = "GOOGLE LLC (DBA)"
 
     assert Fingerprint.create(entity) ==
-             {:ok, [fingerprint: "google llc", original: "GOOGLE LLC (DBA)", script: "latin"]}
+             {:ok,
+              %{
+                script: "latin",
+                original: "GOOGLE LLC (DBA)",
+                fingerprint: "382621CA5922751BB77F398DD0B3CB1B4EACE596",
+                fingerprint_str: "google llc"
+              }}
   end
 
   test "create fingerprint Spark" do
@@ -62,7 +79,12 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [fingerprint: "foundry spark", original: "SPARK FOUNDRY (DBA)", script: "latin"]}
+              %{
+                script: "latin",
+                original: "SPARK FOUNDRY (DBA)",
+                fingerprint: "C3571766B564FAEFC42F03AA6712D7E72DD1CA72",
+                fingerprint_str: "foundry spark"
+              }}
   end
 
   test "create fingerprint Seoul Yakup Co.,Ltd" do
@@ -70,7 +92,12 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [fingerprint: "coltd seoul yakup", original: "Seoul Yakup Co.,Ltd", script: "latin"]}
+              %{
+                script: "latin",
+                original: "Seoul Yakup Co.,Ltd",
+                fingerprint: "58E422A1A0845506B50F8B0004A5E400B0EA922D",
+                fingerprint_str: "coltd seoul yakup"
+              }}
   end
 
   test "create fingerprint INSIGHT CANADA INC." do
@@ -78,11 +105,12 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "canada inc insight",
+              %{
+                script: "latin",
                 original: "INSIGHT CANADA INC.",
-                script: "latin"
-              ]}
+                fingerprint: "60C4BDBCD10ACBBD5BE1CA0C77C1BA50405780C8",
+                fingerprint_str: "canada inc insight"
+              }}
   end
 
   test "create fingerprint MARMARA ÜNİVERSİTESİ DÖNER SERMAYE" do
@@ -90,11 +118,12 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "doner marmara sermaye universitesi",
+              %{
+                script: "latin",
                 original: "MARMARA ÜNİVERSİTESİ DÖNER SERMAYE",
-                script: "latin"
-              ]}
+                fingerprint: "79DBD107836719C92E571C4A1DCE0841331960C3",
+                fingerprint_str: "doner marmara sermaye universitesi"
+              }}
   end
 
   test "create fingerprint NCT HOLDINGS INC" do
@@ -102,14 +131,25 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [fingerprint: "holdings inc nct", original: "NCT HOLDINGS INC", script: "latin"]}
+              %{
+                script: "latin",
+                original: "NCT HOLDINGS INC",
+                fingerprint: "28A7E39001BFA0540D034BB6AFC7DDD395C497A8",
+                fingerprint_str: "holdings inc nct"
+              }}
   end
 
   test "create fingerprint ANTICIMEX" do
     entity = "ANTICIMEX"
 
     assert Fingerprint.create(entity) ==
-             {:ok, [fingerprint: "anticimex", original: "ANTICIMEX", script: "latin"]}
+             {:ok,
+              %{
+                script: "latin",
+                original: "ANTICIMEX",
+                fingerprint: "5AEF14385072DC13E5BCF8FC427288CA25A364CB",
+                fingerprint_str: "anticimex"
+              }}
   end
 
   test "create fingerprint INVENTIV HEALTH CLINICAL" do
@@ -117,11 +157,12 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "clinical health inventiv",
+              %{
+                script: "latin",
                 original: "INVENTIV HEALTH CLINICAL",
-                script: "latin"
-              ]}
+                fingerprint: "142E241CA48DB175D668FB5A6DBF463EBD018C38",
+                fingerprint_str: "clinical health inventiv"
+              }}
   end
 
   test "create fingerprint DOLPHIN GAYRIMENKUL" do
@@ -129,11 +170,12 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "dolphin gayrimenkul",
+              %{
+                script: "latin",
                 original: "DOLPHIN GAYRIMENKUL",
-                script: "latin"
-              ]}
+                fingerprint: "C608D545025F2F83B1944CA1775C000A59F6D8E6",
+                fingerprint_str: "dolphin gayrimenkul"
+              }}
   end
 
   test "create fingerprint INSTITUTE PHARM. SERVICES" do
@@ -141,11 +183,12 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "institute pharm services",
+              %{
+                script: "latin",
                 original: "INSTITUTE PHARM. SERVICES",
-                script: "latin"
-              ]}
+                fingerprint: "5C81EB8B8B5E16BF38E645C9CBBBF015B22E3646",
+                fingerprint_str: "institute pharm services"
+              }}
   end
 
   test "create fingerprint MAGYAR TELEKOM NYRT" do
@@ -153,11 +196,12 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "magyar nyrt telekom",
+              %{
+                script: "latin",
                 original: "MAGYAR TELEKOM NYRT",
-                script: "latin"
-              ]}
+                fingerprint: "A318C1BABB6BD2C0C4FC8BC9A95A66072C1AC977",
+                fingerprint_str: "magyar nyrt telekom"
+              }}
   end
 
   test "create fingerprint IMAGEN ENSAYOS CLINICOS S.L." do
@@ -165,11 +209,12 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "clinicos ensayos imagen sl",
+              %{
+                script: "latin",
                 original: "IMAGEN ENSAYOS CLINICOS S.L.",
-                script: "latin"
-              ]}
+                fingerprint: "3802412D5ACDA4740D079046DE1CF75F99FBC666",
+                fingerprint_str: "clinicos ensayos imagen sl"
+              }}
   end
 
   test "create fingerprint SYNEOS HEALTH HUNGARY KFT" do
@@ -177,25 +222,38 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "health hungary kft syneos",
+              %{
+                script: "latin",
                 original: "SYNEOS HEALTH HUNGARY KFT",
-                script: "latin"
-              ]}
+                fingerprint: "991EE0B97F16D29CC09786BDCDA41FE52DB4B7AD",
+                fingerprint_str: "health hungary kft syneos"
+              }}
   end
 
   test "create fingerprint WIND TRE S.P.A." do
     entity = "WIND TRE S.P.A."
 
     assert Fingerprint.create(entity) ==
-             {:ok, [fingerprint: "spa tre wind", original: "WIND TRE S.P.A.", script: "latin"]}
+             {:ok,
+              %{
+                script: "latin",
+                original: "WIND TRE S.P.A.",
+                fingerprint: "1E0CF009D5FD8132B5DD85EF791609164537EF58",
+                fingerprint_str: "spa tre wind"
+              }}
   end
 
   test "create fingerprint BHS HOTEL AG" do
     entity = "BHS HOTEL AG"
 
     assert Fingerprint.create(entity) ==
-             {:ok, [fingerprint: "ag bhs hotel", original: "BHS HOTEL AG", script: "latin"]}
+             {:ok,
+              %{
+                script: "latin",
+                original: "BHS HOTEL AG",
+                fingerprint: "1B300C7B0CF8CC7E4638D1C04CAED90C6400B9EE",
+                fingerprint_str: "ag bhs hotel"
+              }}
   end
 
   test "create fingerprint SYNEOS HEALTH NETHERLANDS B.V." do
@@ -203,11 +261,12 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "bv health netherlands syneos",
+              %{
+                script: "latin",
                 original: "SYNEOS HEALTH NETHERLANDS B.V.",
-                script: "latin"
-              ]}
+                fingerprint: "DDADE50D7A6E73C853EFB9657CC149FD1827747E",
+                fingerprint_str: "bv health netherlands syneos"
+              }}
   end
 
   test "create fingerprint HAAS & HEALTH PARTNER PUBLIC RELATI" do
@@ -215,11 +274,12 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "haas health partner public relati",
+              %{
+                script: "latin",
                 original: "HAAS & HEALTH PARTNER PUBLIC RELATI",
-                script: "latin"
-              ]}
+                fingerprint: "3A000B500B5C519CFB8CBDC9FE2B4A6B13F31B63",
+                fingerprint_str: "haas health partner public relati"
+              }}
   end
 
   test "create fingerprint INVENTIV HEALTH SWEDEN AB" do
@@ -227,11 +287,12 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "ab health inventiv sweden",
+              %{
+                script: "latin",
                 original: "INVENTIV HEALTH SWEDEN AB",
-                script: "latin"
-              ]}
+                fingerprint: "EEBE224ACAEE82B005B14393468E2D29B0438F9A",
+                fingerprint_str: "ab health inventiv sweden"
+              }}
   end
 
   test "create fingerprint SYNEOS HEALTH FRANCE SARL" do
@@ -239,18 +300,25 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "france health sarl syneos",
+              %{
+                script: "latin",
                 original: "SYNEOS HEALTH FRANCE SARL",
-                script: "latin"
-              ]}
+                fingerprint: "37CFC482B4AB1CAF6A030CB95BC83D9768B061DD",
+                fingerprint_str: "france health sarl syneos"
+              }}
   end
 
   test "create fingerprint CESKA POSTA,S.P." do
     entity = "CESKA POSTA,S.P."
 
     assert Fingerprint.create(entity) ==
-             {:ok, [fingerprint: "ceska postasp", original: "CESKA POSTA,S.P.", script: "latin"]}
+             {:ok,
+              %{
+                script: "latin",
+                original: "CESKA POSTA,S.P.",
+                fingerprint: "949060F392A64355AF9A56968C3A400A4F6ED59A",
+                fingerprint_str: "ceska postasp"
+              }}
   end
 
   test "create fingerprint SYNEOS HEALTH CZ S.R.O." do
@@ -258,11 +326,12 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "cz health sro syneos",
+              %{
+                script: "latin",
                 original: "SYNEOS HEALTH CZ S.R.O.",
-                script: "latin"
-              ]}
+                fingerprint: "D6D3BB08ABDC9249DAEE4E596BE7A9324891B504",
+                fingerprint_str: "cz health sro syneos"
+              }}
   end
 
   test "create fingerprint GALEN-SYMPOSION S.R.O." do
@@ -270,11 +339,12 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "galensymposion sro",
+              %{
+                script: "latin",
                 original: "GALEN-SYMPOSION S.R.O.",
-                script: "latin"
-              ]}
+                fingerprint: "CAE82440DAB8E2A34AA5EC14E14F6F06DEC55612",
+                fingerprint_str: "galensymposion sro"
+              }}
   end
 
   test "create fingerprint ICON CLINICAL RESEARCH LTD" do
@@ -282,25 +352,38 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "clinical icon ltd research",
+              %{
+                script: "latin",
                 original: "ICON CLINICAL RESEARCH LTD",
-                script: "latin"
-              ]}
+                fingerprint: "788E2A6CE6AC31E744929F6C755592E3D786CA3B",
+                fingerprint_str: "clinical icon ltd research"
+              }}
   end
 
   test "create fingerprint CEPHEID" do
     entity = "CEPHEID"
 
     assert Fingerprint.create(entity) ==
-             {:ok, [fingerprint: "cepheid", original: "CEPHEID", script: "latin"]}
+             {:ok,
+              %{
+                script: "latin",
+                original: "CEPHEID",
+                fingerprint: "36F899E5B8D135560DBC88BE787D5284AC87EAC4",
+                fingerprint_str: "cepheid"
+              }}
   end
 
   test "create fingerprint HOLOGIC, INC" do
     entity = "HOLOGIC, INC"
 
     assert Fingerprint.create(entity) ==
-             {:ok, [fingerprint: "hologic inc", original: "HOLOGIC, INC", script: "latin"]}
+             {:ok,
+              %{
+                script: "latin",
+                original: "HOLOGIC, INC",
+                fingerprint: "AA505D10E541C96995318689FBB9168480350F12",
+                fingerprint_str: "hologic inc"
+              }}
   end
 
   test "create fingerprint BRACKET GLOBAL, L.L.C." do
@@ -308,11 +391,12 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "bracket global llc",
+              %{
+                script: "latin",
                 original: "BRACKET GLOBAL, L.L.C.",
-                script: "latin"
-              ]}
+                fingerprint: "29EEBE7AE84235013EC0DCEA758F8D99CF372E5C",
+                fingerprint_str: "bracket global llc"
+              }}
   end
 
   test "create fingerprint COVANCE LABORATORIES" do
@@ -320,11 +404,12 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "covance laboratories",
+              %{
+                script: "latin",
                 original: "COVANCE LABORATORIES",
-                script: "latin"
-              ]}
+                fingerprint: "F8EB033A7CF91D9D79C6C7D49FE6A6F52AC90E4B",
+                fingerprint_str: "covance laboratories"
+              }}
   end
 
   test "create fingerprint WATERMARK RESEARCH PARTNERS," do
@@ -332,11 +417,12 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "partners research watermark",
+              %{
+                script: "latin",
                 original: "WATERMARK RESEARCH PARTNERS,",
-                script: "latin"
-              ]}
+                fingerprint: "EBFC96106AE60312234A76E2984D7491FEA3FB8E",
+                fingerprint_str: "partners research watermark"
+              }}
   end
 
   test "create fingerprint SIGNANT HEALTH GLOBAL LLC" do
@@ -344,11 +430,12 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "global health llc signant",
+              %{
+                script: "latin",
                 original: "SIGNANT HEALTH GLOBAL LLC",
-                script: "latin"
-              ]}
+                fingerprint: "B44395176769D3BB2FC7070A20C075FB5EF0AD2E",
+                fingerprint_str: "global health llc signant"
+              }}
   end
 
   test "create fingerprint CAMBRIDGE ENTERPRISE LIMITED" do
@@ -356,11 +443,12 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "cambridge enterprise limited",
+              %{
+                script: "latin",
                 original: "CAMBRIDGE ENTERPRISE LIMITED",
-                script: "latin"
-              ]}
+                fingerprint: "0EA076937E723567FAEF16BFD2F5AFFAAAF05E70",
+                fingerprint_str: "cambridge enterprise limited"
+              }}
   end
 
   test "create fingerprint JOHN WILEY AND SONS INC" do
@@ -368,11 +456,12 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "and inc john sons wiley",
+              %{
+                script: "latin",
                 original: "JOHN WILEY AND SONS INC",
-                script: "latin"
-              ]}
+                fingerprint: "8077071BFE891BC4AE17108AADAD3A84FA85BB99",
+                fingerprint_str: "and inc john sons wiley"
+              }}
   end
 
   test "create fingerprint for 佐贤鸣智（上海）企业管理咨询有限公司" do
@@ -380,10 +469,11 @@ defmodule EntityFingerprint.FingerprintTest do
 
     assert Fingerprint.create(entity) ==
              {:ok,
-              [
-                fingerprint: "guanlizixun shanghai zuoxianmingzhi",
+              %{
+                script: "han",
                 original: "佐贤鸣智（上海）企业管理咨询有限公司",
-                script: "han"
-              ]}
+                fingerprint: "51DDB4F4AA0F7484E7D9AD5CA2A81C4CAFAB5A4C",
+                fingerprint_str: "guanlizixun shanghai zuoxianmingzhi"
+              }}
   end
 end

@@ -1,6 +1,6 @@
 defmodule EntityFingerprint.Loader do
   @abbreviation_file Path.join(:code.priv_dir(:entityfingerprint), "abbreviations.json")
-  
+
   @moduledoc false
   def load_abbreviations do
     @abbreviation_file
